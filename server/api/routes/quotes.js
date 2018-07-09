@@ -14,6 +14,7 @@ router.post('/', (req, res, next) => {
                date: req.body.date,
                likes: req.body.likes,
                comments: req.body.comments,
+               userPic: req.body.userPic
           })
           .save()
           .then(quote => {
@@ -60,4 +61,5 @@ router.delete('/:id', (req, res, next) => {
                res.status(500).json(error)
           })
 });
+
 module.exports = router;

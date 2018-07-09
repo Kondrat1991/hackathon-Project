@@ -22,6 +22,7 @@ let Quote = new Schema({
         type: String,
         require: true
     },
+    userPic: {type: String, default: 'https://rusturkey.com/img/no_user.png'}
 }, {
     versionKey: false
 });
