@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+.total-wrapper {
+    display: flex;
+    background-color: #ebecf0;
+}
+
+.sideBar {
+    flex-basis: 20%;
+    background-color: #5a5b62;
+}
+
+.flex-wrapper {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
