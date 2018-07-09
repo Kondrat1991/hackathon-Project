@@ -1,33 +1,27 @@
 import React from 'react';
-import './Header.css';
-import {Navbar, NavItem, Icon} from 'react-materialize';
+// import './Header.css';
+import {connect} from 'react-redux';
+import {logOut} from '../../actions/headerAction';
+import toggleShowLogin from '../../actions/toggleLoginAction';
+import toggleShowRegistration from '../../actions/toggleRegistrationAction';
+import {Navbar, NavItem} from 'react-materialize';
 
-const Header = () => {
+const Header = (props) => {
     return (
         <Navbar brand='logo' right>
-            <NavItem onClick={() => console.log('test click')}>Getting started</NavItem>
-            <NavItem href='components.html'>Components</NavItem>
+            {
+                props.isLogin
+                    ? <NavItem onClick={props.logout}>LOG OUT</NavItem>
+                    : <div>
+                        <NavItem onClick={props.toggleShowRegistration}>SIGN UP</NavItem>
+                        <NavItem onClick={props.toggleShowLogin}>SIGN IN</NavItem>
+                    </div>
+            }
         </Navbar>
-
-
-
-        /*{/!*<div className='header'>*!/}
-            {/!*<a href="" className='header-logo'>Qoute</a>*!/}
-            {/!*<div className='header-nav'>*!/}
-                {/!*{*!/}
-                    {/!*props.isLogin*!/}
-                        {/!*? <button className="header-button" onClick={props.logout}>Log Out</button>*!/}
-                        {/!*: <div>*!/}
-                            {/!*<button className="header-button" onClick={props.toggleShowRegistration}>Sign Up</button>*!/}
-                            {/!*<button className="header-button" onClick={props.toggleShowLogin}>Login</button>*!/}
-                        {/!*</div>*!/}
-                {/!*}*!/}
-            {/!*</div>*!/}
-        {/!*</div>*!/}*/
     )
 };
 
-/*const MSTP = (state) => {
+const MSTP = (state) => {
     return {
         isLogin: state.isLogin,
     }
@@ -38,8 +32,16 @@ const MDTP = (dispatch) => {
         logout: function () {
             localStorage.removeItem('token');
             dispatch(logOut());
+        },
+
+        toggleShowLogin: function () {
+            dispatch(toggleShowLogin())
+        },
+
+        toggleShowRegistration: function () {
+            dispatch(toggleShowRegistration())
         }
     }
-};*/
+};
 
-export default Header;
+export default connect(MSTP, MDTP)(Header);
