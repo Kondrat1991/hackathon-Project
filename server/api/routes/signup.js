@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const {
     secret
-} = require('../config/index');
+} = require('../../config/index');
 
 const User = require('../models/user');
 
