@@ -1,25 +1,25 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const Cost = require('../models/cost');
+const Quote = require('../models/quote');
 const jwt = require('jsonwebtoken');
 
 router.post('/', (req, res, next) => {
      const decoded = jwt.decode(req.headers.authorization);
      console.log('decoded', decoded);
-     const newCost = new Cost({
+     const newQuote = new Quote({
                _id: new mongoose.Types.ObjectId(),
                userId: decoded._id,
-               cost: req.body.cost,
+               quote: req.body.quote,
                date: req.body.date,
-               category: req.body.category,
+               likes: req.body.likes,
                comments: req.body.comments,
           })
           .save()
-          .then(cost => {
+          .then(quote => {
                res.status(201).json({
-                    Message: "Your cost saved",
-                    cost: cost,
+                    Message: "Your quote is posted already",
+                   quote: quote,
                })
 
           })
@@ -30,14 +30,14 @@ router.post('/', (req, res, next) => {
 router.get('/', (req, res, next) => {
      const decoded = jwt.decode(req.headers.authorization);
 
-     Cost.find({
+     Quote.find({
                userId: decoded._id
           })
           .exec()
           .then(collect => {
                res.status(200).json({
-                    Message: 'Your collection costs',
-                    costs: collect
+                    Message: 'List of your quotes',
+                   quotes: collect
                })
           })
           .catch(error => {
@@ -48,12 +48,12 @@ router.get('/', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
     console.log('req params', req.params);
-    Cost.findByIdAndRemove(req.params.id)
+    Quote.findByIdAndRemove(req.params.id)
           .exec()
-          .then(cost => {
+          .then(quote => {
                res.status(200).json({
-                    Message: 'Your cost deleted ',
-                    costId: cost._id,
+                    Message: 'Your quote deleted now ',
+                    quoteId: quote._id,
                })
           })
           .catch(error => {
