@@ -11,6 +11,8 @@ class App extends Component {
       <Fragment>
         <button>SingUp</button>
         <button>Login</button>
+
+
         {/* <Header />
         <Main /> */}
       </Fragment>
