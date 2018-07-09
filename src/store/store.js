@@ -1,13 +1,20 @@
-import { createStore, applyMiddleware } from 'redux';
-import reducers from '../reducers';
+import {createStore, applyMiddleware} from 'redux';
+import reducers from '../reducers/';
 import thunk from 'redux-thunk';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {createBrowserHistory} from 'history';
+import {connectRouter} from 'connected-react-router';
 
-const DevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+export const history = createBrowserHistory();
 
-const store = createStore(
-    reducers,
-    DevTools,
-    applyMiddleware(thunk)
-);
+const middleware = [thunk];
 
-export default store;
+const enchancer = composeWithDevTools(applyMiddleware(...middleware));
+
+
+export default function configureStore(persistedState = {}) {
+    return createStore(
+        connectRouter(history)(reducers),
+        persistedState, enchancer
+    );
+}

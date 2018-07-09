@@ -2,7 +2,35 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import {Provider} from 'react-redux';
+import configureStore, {history} from './store/store';
+import {ConnectedRouter} from 'connected-react-router';
+import {Route} from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+// const persistedState = loadState();
+const store = configureStore();
+
+// setInterval(() => {
+//     store.subscribe(() => {
+//         saveState({
+//             // costs: store.getState().costs,
+//           //   budget: store.getState().budget,
+//           //   isLogin: store.getState().isLogin,
+//           //   period: store.getState().period,
+//           //   typeChart: store.getState().typeChart,
+//           //   categoryFromChart: store.getState().categoryFromChart,
+//           //   filterCategory: store.getState().filterCategory,
+//           //   click: store.getState().click,
+//           //   spent: store.getState().spent,
+//           //   budgetShow: store.getState().budgetShow,
+//         })
+//     });
+// }, 1000);
+
+ReactDOM.render(
+    <Provider store={store}>
+        <ConnectedRouter history={history}>
+            <Route path="/" component={App} />
+        </ConnectedRouter>
+    </Provider>
+    , document.getElementById('root'));
