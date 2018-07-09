@@ -1,6 +1,6 @@
 {
-  "name": "money-tracker",
-  "homepage": "https://den11m.github.io/moneyTracker/build/",
+  "name": "quotes-project",
+  "homepage": "https://kondrat1991.github.io/hackathon-Project/build",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
