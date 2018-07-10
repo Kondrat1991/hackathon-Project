@@ -13,12 +13,12 @@ router.post('/', (req, res, next) => {
         quote: req.body.quote,
         date: req.body.date,
         likes: req.body.likes,
-        comments: req.body.comments,
+        comments:  req.body.comments,
         userPic: req.body.userPic
     })
         .save()
         .then(quote => {
-            console.log('look at quote', quote);
+            // console.log('look at quote', quote);
             res.status(201).json({
                 Message: "Your quote is posted already",
                 quote: quote,
@@ -32,11 +32,14 @@ router.post('/', (req, res, next) => {
 router.get('/', (req, res, next) => {
     const decoded = jwt.decode(req.headers.authorization);
 
-    Quote.find({
-        userId: decoded._id
-    })
+    Quote.find(
+    //     {
+    //     userId: decoded._id
+    // }
+    )
         .exec()
         .then(collect => {
+            // console.log('look at collect',collect);
             res.status(200).json({
                 Message: 'List of your quotes',
                 quotes: collect
@@ -62,5 +65,7 @@ router.delete('/:id', (req, res, next) => {
             res.status(500).json(error)
         })
 });
+
+
 
 module.exports = router;
